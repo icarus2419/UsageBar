@@ -1,4 +1,4 @@
-APP := build/Usage Battery.app
+APP := build/UsageBar.app
 INSTALL_DIR ?= $(HOME)/Applications
 
 .PHONY: app run install uninstall test print clean
@@ -8,25 +8,28 @@ app:
 
 run: app
 	-pkill -x UsageBattery
+	-pkill -x UsageBar
 	open "$(APP)"
 
 install: app
 	-pkill -x UsageBattery
+	-pkill -x UsageBar
 	mkdir -p "$(INSTALL_DIR)"
-	rm -rf "$(INSTALL_DIR)/Usage Battery.app"
+	rm -rf "$(INSTALL_DIR)/UsageBar.app"
 	cp -R "$(APP)" "$(INSTALL_DIR)/"
-	open "$(INSTALL_DIR)/Usage Battery.app"
-	@echo "Installed to $(INSTALL_DIR)/Usage Battery.app"
+	open "$(INSTALL_DIR)/UsageBar.app"
+	@echo "Installed to $(INSTALL_DIR)/UsageBar.app"
 
 uninstall:
 	-pkill -x UsageBattery
-	rm -rf "$(INSTALL_DIR)/Usage Battery.app"
+	-pkill -x UsageBar
+	rm -rf "$(INSTALL_DIR)/UsageBar.app"
 
 test:
 	swift test
 
 print:
-	swift run -c release UsageBattery --print
+	swift run -c release UsageBar --print
 
 clean:
 	rm -rf .build build

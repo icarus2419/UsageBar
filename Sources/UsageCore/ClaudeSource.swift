@@ -137,7 +137,7 @@ public enum ClaudeSource {
     }
 
     /// Asks Claude Code to refresh its own login (it rewrites the Keychain item), then re-reads it.
-    /// Usage Battery never uses the refresh token itself: rotating it would sign Claude Code out.
+    /// UsageBar never uses the refresh token itself: rotating it would sign Claude Code out.
     private static func refreshViaCLI() async throws -> Credentials? {
         guard await RefreshThrottle.shared.allow() else { return nil }
         return try await Task.detached(priority: .utility) { () -> Credentials? in

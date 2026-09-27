@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
-# Builds "build/Usage Battery.app": release binary, Info.plist, icon, ad-hoc signature.
+# Builds "build/UsageBar.app": release binary, Info.plist, icon, ad-hoc signature.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-APP_NAME="Usage Battery"
-BUNDLE_ID="${BUNDLE_ID:-app.usagebattery.UsageBattery}"
+APP_NAME="UsageBar"
+BUNDLE_ID="${BUNDLE_ID:-com.icarus2419.UsageBar}"
 VERSION="${VERSION:-1.0.0}"
 BUILD_DIR="$ROOT/build"
 APP="$BUILD_DIR/$APP_NAME.app"
 ICNS="$BUILD_DIR/AppIcon.icns"
 
-swift build -c release --product UsageBattery
-BIN="$(swift build -c release --show-bin-path)/UsageBattery"
+swift build -c release --product UsageBar
+BIN="$(swift build -c release --show-bin-path)/UsageBar"
 
 if [[ ! -f "$ICNS" || "scripts/make-icon.swift" -nt "$ICNS" ]]; then
   echo "Rendering icon…"
@@ -27,7 +27,7 @@ fi
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-cp "$BIN" "$APP/Contents/MacOS/UsageBattery"
+cp "$BIN" "$APP/Contents/MacOS/UsageBar"
 cp "$ICNS" "$APP/Contents/Resources/AppIcon.icns"
 
 cat > "$APP/Contents/Info.plist" <<PLIST
@@ -37,7 +37,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <dict>
   <key>CFBundleDevelopmentRegion</key><string>en</string>
   <key>CFBundleDisplayName</key><string>$APP_NAME</string>
-  <key>CFBundleExecutable</key><string>UsageBattery</string>
+  <key>CFBundleExecutable</key><string>UsageBar</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
   <key>CFBundleIdentifier</key><string>$BUNDLE_ID</string>
   <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
@@ -49,7 +49,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
   <key>LSMinimumSystemVersion</key><string>13.0</string>
   <key>LSUIElement</key><true/>
   <key>NSHighResolutionCapable</key><true/>
-  <key>NSHumanReadableCopyright</key><string>Your Claude and OpenAI limits, as a battery.</string>
+  <key>NSHumanReadableCopyright</key><string>Your AI plan limits, at a glance.</string>
 </dict>
 </plist>
 PLIST

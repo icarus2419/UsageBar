@@ -2,10 +2,10 @@
 import PackageDescription
 
 let package = Package(
-    name: "UsageBattery",
+    name: "UsageBar",
     platforms: [.macOS(.v13)],
     products: [
-        .executable(name: "UsageBattery", targets: ["UsageBattery"]),
+        .executable(name: "UsageBar", targets: ["UsageBattery"]),
     ],
     targets: [
         .target(name: "UsageCore"),

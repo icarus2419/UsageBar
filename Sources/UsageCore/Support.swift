@@ -145,7 +145,7 @@ public enum Shell {
 // MARK: - HTTP
 
 enum HTTP {
-    static let userAgent = "UsageBattery/1.0 (macOS)"
+    static let userAgent = "UsageBar/1.0 (macOS)"
 
     /// This app has no inference API. Even accidental future callers cannot send
     /// prompts or credentials to a generation endpoint through this transport.

@@ -238,7 +238,7 @@ final class WidgetController: NSObject {
             }
             return "\(provider.displayName): \(Int(window.remainingPercent.rounded()))% of \(window.label.lowercased()) left"
         }.joined(separator: "\n")
-        container.setAccessibilityLabel("Usage Battery. " + (container.toolTip ?? "Open usage details"))
+        container.setAccessibilityLabel("UsageBar. " + (container.toolTip ?? "Open usage details"))
     }
 
     // MARK: Geometry

@@ -57,7 +57,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         guard let button = item?.button else { return }
         let readings = prefs.providers.map { store.reading(for: $0) }
         guard !readings.isEmpty else {
-            button.image = NSImage(systemSymbolName: "battery.50", accessibilityDescription: "Usage Battery")
+            button.image = NSImage(systemSymbolName: "battery.50", accessibilityDescription: "UsageBar")
             return
         }
         let dark = button.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua

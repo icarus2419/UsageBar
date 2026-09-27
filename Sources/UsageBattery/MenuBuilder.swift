@@ -84,7 +84,7 @@ final class MenuBuilder {
         menu.addItem(login)
         menu.addItem(.separator())
 
-        menu.addItem(ActionItem("About Usage Battery") {
+        menu.addItem(ActionItem("About UsageBar") {
             if #available(macOS 14, *) { NSApp.activate() } else { NSApp.activate(ignoringOtherApps: true) }
             NSApp.orderFrontStandardAboutPanel(options: [
                 .credits: NSAttributedString(
@@ -93,7 +93,7 @@ final class MenuBuilder {
                 ),
             ])
         })
-        menu.addItem(ActionItem("Quit Usage Battery", key: "q") { NSApp.terminate(nil) })
+        menu.addItem(ActionItem("Quit UsageBar", key: "q") { NSApp.terminate(nil) })
         return menu
     }
 

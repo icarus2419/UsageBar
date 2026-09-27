@@ -12,8 +12,8 @@ struct DetailView: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("Usage Battery").font(.headline)
-                    Text("Your plan capacity, at a glance")
+                    Text("UsageBar").font(.headline)
+                    Text("Your plan limits, at a glance")
                         .font(.caption).foregroundStyle(.secondary)
                 }
                 Spacer()

@@ -3,7 +3,7 @@ import Combine
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
-    nonisolated static let showNotification = Notification.Name("UsageBattery.show")
+    nonisolated static let showNotification = Notification.Name("UsageBar.show")
 
     let prefs = Prefs()
     lazy var store = UsageStore(prefs: prefs)

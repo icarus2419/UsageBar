@@ -1,7 +1,7 @@
 import Foundation
 import UsageCore
 
-/// `UsageBattery --print | --short | --json`: one-shot output for scripts and status lines.
+/// `UsageBar --print | --short | --json`: one-shot output for scripts and status lines.
 enum CLI {
     enum Format {
         case lines, short, json
