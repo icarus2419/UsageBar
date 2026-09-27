@@ -10,13 +10,19 @@ permissions:
 
 jobs:
   release:
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       - name: Check out source
         uses: actions/checkout@v4
 
       - name: Build UsageBar
-        run: make app VERSION="${GITHUB_REF_NAME#v}"
+        run: make app VERSION="${GITHUB_REF_NAME#v}" UNIVERSAL=1
+
+      - name: Verify app bundle
+        run: |
+          lipo build/UsageBar.app/Contents/MacOS/UsageBar -verify_arch arm64 x86_64
+          codesign --verify --deep --strict build/UsageBar.app
+          plutil -lint build/UsageBar.app/Contents/Info.plist
 
       - name: Package app
         run: |

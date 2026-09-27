@@ -16,7 +16,7 @@ UsageBar turns the usage you already have into a glanceable pair of battery bars
 
 ## Install
 
-On Apple silicon, install directly through the UsageBar Homebrew tap:
+Install on Apple Silicon or Intel through the UsageBar Homebrew tap:
 
 ```sh
 brew install --cask icarus2419/usagebar/usagebar
@@ -24,7 +24,14 @@ brew install --cask icarus2419/usagebar/usagebar
 
 Or download **UsageBar-macos.zip** from [the latest release](https://github.com/icarus2419/UsageBar/releases/latest), unzip it, and move **UsageBar.app** to Applications.
 
-Requires macOS 13 or later. The Homebrew cask and prebuilt release currently target Apple silicon (M1 or later). The first launch may need the standard macOS confirmation for an app downloaded outside the App Store: Control-click UsageBar in Applications, choose **Open**, then confirm.
+Requires macOS 13 or later. The prebuilt app supports Apple Silicon and Intel Macs. The first launch may need the standard macOS confirmation for an app downloaded outside the App Store: Control-click UsageBar in Applications, choose **Open**, then confirm.
+
+To update or remove the Homebrew install later:
+
+```sh
+brew upgrade --cask icarus2419/usagebar/usagebar
+brew uninstall --cask icarus2419/usagebar/usagebar
+```
 
 Open UsageBar. Sign in to Claude Code and/or Codex first; UsageBar picks up their existing login.
 

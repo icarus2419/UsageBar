@@ -12,8 +12,21 @@ BUILD_DIR="$ROOT/build"
 APP="$BUILD_DIR/$APP_NAME.app"
 ICNS="$BUILD_DIR/AppIcon.icns"
 
-swift build -c release --product UsageBar
-BIN="$(swift build -c release --show-bin-path)/UsageBar"
+if [[ "${UNIVERSAL:-0}" == "1" ]]; then
+  if [[ "$(uname -m)" != "arm64" ]]; then
+    echo "Universal releases must be built on an Apple Silicon Mac." >&2
+    exit 1
+  fi
+  swift build -c release --product UsageBar
+  ARM_BIN="$(swift build -c release --show-bin-path)/UsageBar"
+  swift build -c release --product UsageBar \
+    --triple x86_64-apple-macosx13.0 \
+    --scratch-path "$ROOT/.build/intel"
+  INTEL_BIN="$ROOT/.build/intel/x86_64-apple-macosx/release/UsageBar"
+else
+  swift build -c release --product UsageBar
+  BIN="$(swift build -c release --show-bin-path)/UsageBar"
+fi
 
 if [[ ! -f "$ICNS" || "scripts/make-icon.swift" -nt "$ICNS" ]]; then
   echo "Rendering icon…"
@@ -27,7 +40,12 @@ fi
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-cp "$BIN" "$APP/Contents/MacOS/UsageBar"
+if [[ "${UNIVERSAL:-0}" == "1" ]]; then
+  lipo -create "$ARM_BIN" "$INTEL_BIN" -output "$APP/Contents/MacOS/UsageBar"
+  lipo "$APP/Contents/MacOS/UsageBar" -verify_arch arm64 x86_64
+else
+  cp "$BIN" "$APP/Contents/MacOS/UsageBar"
+fi
 cp "$ICNS" "$APP/Contents/Resources/AppIcon.icns"
 
 cat > "$APP/Contents/Info.plist" <<PLIST
